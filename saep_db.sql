@@ -28,7 +28,8 @@ CREATE TABLE usuarios (
 CREATE TABLE tutores (
   id       INTEGER PRIMARY KEY AUTOINCREMENT,
   nome     VARCHAR(100) NOT NULL,
-  cpf      CHAR(11) NOT NULL UNIQUE,
+  cpf      VARCHAR(200) NOT NULL,      -- criptografado (AES-256-GCM): LGPD
+  cpf_hash CHAR(64) NOT NULL UNIQUE,   -- hash do CPF: garante CPF único sem expor o número
   telefone VARCHAR(20) NOT NULL,
   email    VARCHAR(120),
   endereco VARCHAR(200)
@@ -74,10 +75,20 @@ INSERT INTO usuarios (nome, email, senha_hash) VALUES
 ('Dra. Marina Souza', 'vet@clinica.com',   '$2a$10$idP5YUDvAvbDSlnH0Hjn/ujR/kiW3/L6ZaeeVZ6Zp.qqGP3BnWLQC'),
 ('Carlos Recepção',   'recep@clinica.com', '$2a$10$t0nSG4fghY0p0dUJSeWjT./1GnVkWotPfsYVObGRACqfhgMWVnG2S');
 
-INSERT INTO tutores (nome, cpf, telefone, email, endereco) VALUES
-('Ana Paula Lima', '11144477735', '(71) 99999-1111', 'ana@email.com',   'Rua das Flores, 10 - Salvador/BA'),
-('Bruno Carvalho', '52998224725', '(71) 98888-2222', 'bruno@email.com', 'Av. Central, 250 - Lauro de Freitas/BA'),
-('Carla Mendes',   '39053344705', '(71) 97777-3333', 'carla@email.com', 'Rua do Sol, 77 - Camaçari/BA');
+-- Os CPFs abaixo estão criptografados (o sistema os descriptografa para exibir).
+INSERT INTO tutores (nome, cpf, cpf_hash, telefone, email, endereco) VALUES
+('Ana Paula Lima',
+ '051a24fef5669483e1872b55:4168e5f0ec7ee228088670198c96cfe7:4458bddefc2e946c38dc5e',
+ '8847d6adb27fbcef3fc60957f54f2a04cb35c44fd4e8f844c65a8a5672670c00',
+ '(71) 99999-1111', 'ana@email.com', 'Rua das Flores, 10 - Salvador/BA'),
+('Bruno Carvalho',
+ '5d5acb6c982cc294840218c8:ca0c4235b5a708a61574dfe232bdc734:b96c29f940d4fe34e09627',
+ '608bb86a2664db48cfc90cd922b46f0b1a66bfbc7112ecbdf9b3431c39faf61a',
+ '(71) 98888-2222', 'bruno@email.com', 'Av. Central, 250 - Lauro de Freitas/BA'),
+('Carla Mendes',
+ 'aebee5778a887455e60457d9:854e203742bdae907dd681cb38bfe6c4:f2f175adc0e6c002ff91ba',
+ '2d3ec12a72a67799eb88ee2bddd294efc5fa1c570890c9d32df371a6e1ff2dca',
+ '(71) 97777-3333', 'carla@email.com', 'Rua do Sol, 77 - Camaçari/BA');
 
 INSERT INTO pets (nome, especie, raca, data_nascimento, tutor_id) VALUES
 ('Rex',  'Cachorro', 'Labrador', '2020-03-15', 1),

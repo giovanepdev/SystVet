@@ -1,6 +1,6 @@
 # Clínica Veterinária - SAEP (SENAI)
 
-Sistema web para cadastro e gerenciamento de **tutores**, **pets** e **agendamentos**, com login (sessão de 30 minutos) e proteção de dados pessoais (LGPD).
+Sistema web para cadastro e gerenciamento de **tutores**, **pets** e **agendamentos**, com login (sessão de 30 minutos) e proteção de dados pessoais (LGPD): senhas com hash e **CPF criptografado** (AES-256-GCM) no banco, mascarado na tela.
 
 **Tecnologias:** HTML, CSS, JavaScript, Node.js + Express (TypeScript) e SQLite.
 
