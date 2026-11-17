@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agendamentos - Clínica Veterinária</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="cabecalho"></header>
+  <main>
+    <div id="msg" class="msg"></div>
+    <section class="cartao">
+      <h2 id="titulo">Novo agendamento</h2>
+      <form id="form">
+        <input type="hidden" id="id">
+        <label>Pet
+          <select id="pet_id" required></select>
+        </label>
+        <label>Data e hora <input type="datetime-local" id="data_hora" required></label>
+        <label>Motivo <input id="motivo" required></label>
+        <label>Status
+          <select id="status">
+            <option>Agendado</option>
+            <option>Concluído</option>
+            <option>Cancelado</option>
+          </select>
+        </label>
+        <div class="acoes">
+          <button type="submit">Salvar</button>
+          <button type="button" class="cinza" onclick="limpar()">Cancelar</button>
+        </div>
+      </form>
+    </section>
+    <section class="cartao">
+      <h2>Agendamentos</h2>
+      <table>
+        <thead><tr><th>Data/hora</th><th>Pet</th><th>Tutor</th><th>Motivo</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/agendamentos.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pets - Clínica Veterinária</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="cabecalho"></header>
+  <main>
+    <div id="msg" class="msg"></div>
+    <section class="cartao">
+      <h2 id="titulo">Novo pet</h2>
+      <form id="form">
+        <input type="hidden" id="id">
+        <label>Nome <input id="nome" required></label>
+        <label>Espécie <input id="especie" required></label>
+        <label>Raça <input id="raca"></label>
+        <label>Data de nascimento <input type="date" id="data_nascimento"></label>
+        <label>Tutor (obrigatório)
+          <select id="tutor_id" required></select>
+        </label>
+        <div class="acoes">
+          <button type="submit">Salvar</button>
+          <button type="button" class="cinza" onclick="limpar()">Cancelar</button>
+        </div>
+      </form>
+    </section>
+    <section class="cartao">
+      <h2>Pets cadastrados</h2>
+      <table>
+        <thead><tr><th>Nome</th><th>Espécie</th><th>Raça</th><th>Tutor</th><th>Ações</th></tr></thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/pets.js"></script>
+</body>
+</html>
