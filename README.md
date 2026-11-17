@@ -2,7 +2,7 @@
 
 Sistema web para cadastro e gerenciamento de **tutores**, **pets** e **agendamentos**, com login (sessão de 30 minutos) e proteção de dados pessoais (LGPD).
 
-**Tecnologias:** HTML, CSS, JavaScript, Node.js + Express (TypeScript) e MySQL.
+**Tecnologias:** HTML, CSS, JavaScript, Node.js + Express (TypeScript) e SQLite.
 
 ## Estrutura
 
@@ -15,23 +15,17 @@ Sistema web para cadastro e gerenciamento de **tutores**, **pets** e **agendamen
 
 ## Como executar
 
-1. Execute o `saep_db.sql` no MySQL (Workbench: *File → Open SQL Script* e o raio).
-2. Na pasta `sistema`:
+Não precisa instalar banco de dados: na primeira execução o sistema cria o arquivo `sistema/saep.db` lendo o `saep_db.sql`. Para recriar o banco, apague o `saep.db`.
 
 ```bash
+cd sistema
 npm install
-```
-
-3. Informe a senha do MySQL (PowerShell) e inicie:
-
-```bash
-$env:DB_PASS="SUA_SENHA"
 npm start
 ```
 
-4. Acesse `http://localhost:3000` e entre com `admin@clinica.com` / `admin123`.
+Acesse `http://localhost:3000` e entre com `admin@clinica.com` / `admin123`.
 
-Variáveis opcionais: `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_NAME`, `PORT`.
+Logins de teste: `admin@clinica.com` / `admin123`, `vet@clinica.com` / `vet12345`, `recep@clinica.com` / `recep123`.
 
 ## Autor
 

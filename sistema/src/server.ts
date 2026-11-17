@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { autenticar } from './auth';
+import { pronto } from './db';
 import login from './routes/login';
 import tutores from './routes/tutores';
 import pets from './routes/pets';
@@ -16,4 +17,6 @@ app.use('/api/pets', autenticar, pets);
 app.use('/api/agendamentos', autenticar, agendamentos);
 
 const PORTA = Number(process.env.PORT) || 3000;
-app.listen(PORTA, () => console.log(`Sistema rodando em http://localhost:${PORTA}`));
+pronto.then(() => {
+  app.listen(PORTA, () => console.log(`Sistema rodando em http://localhost:${PORTA}`));
+});

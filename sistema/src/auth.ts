@@ -26,11 +26,12 @@ export const tratar =
   (fn: (req: AuthRequest, res: Response) => Promise<unknown>): RequestHandler =>
   (req, res) => {
     fn(req, res).catch((e: any) => {
-      if (e.code === 'ER_ROW_IS_REFERENCED_2')
+      const msg = String(e.message || '');
+      if (msg.includes('FOREIGN KEY') && req.method === 'DELETE')
         return res.status(409).json({ erro: 'Registro possui vínculos e não pode ser excluído.' });
-      if (e.code === 'ER_DUP_ENTRY')
+      if (msg.includes('UNIQUE'))
         return res.status(409).json({ erro: 'Registro duplicado (CPF ou e-mail já cadastrado).' });
-      if (e.code === 'ER_NO_REFERENCED_ROW_2')
+      if (msg.includes('FOREIGN KEY'))
         return res.status(400).json({ erro: 'Referência inválida (tutor ou pet inexistente).' });
       console.error(e);
       res.status(500).json({ erro: 'Erro interno do servidor.' });
